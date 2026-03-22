@@ -28,6 +28,24 @@ const HOTSPOTS = [
     desc: "World-class brands and cinema experience nearby."
   },
   {
+    name: "Ngurah Rai Airport",
+    time: "15-20 Mins",
+    type: "Global Connection",
+    desc: "Quick access to the international airport for seamless arrivals and departures."
+  },
+  {
+    name: "Waterbom Bali",
+    time: "10 Mins",
+    type: "Family & Fun",
+    desc: "Asia's #1 waterpark, perfect for a day of excitement and relaxation."
+  },
+  {
+    name: "Kuta Art Market",
+    time: "5 Mins",
+    type: "Local Crafts",
+    desc: "Discover unique Balinese souvenirs and traditional handcrafted items."
+  },
+  {
     name: "Local Warungs",
     time: "Walking Distance",
     type: "Authentic Food",
