@@ -50,7 +50,7 @@ const RoomGallery = () => {
         .from('bp_rooms')
         .select('*');
       
-      if (data && !error) {
+      if (data && data.length > 0 && !error) {
         setRooms(data);
       }
     };
