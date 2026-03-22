@@ -1,5 +1,5 @@
 "use client";
-// Version: V7-EMERGENCY-FIX-VISIBILITY
+// Version: V8-QUALITY-OPTIMIZATION
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
@@ -15,26 +15,35 @@ const About = () => {
       // @ts-ignore
       const pannellum = window.pannellum;
 
-      if (!pannellum) {
-        console.warn("Pannellum not available. Waiting...");
-        return;
-      }
+      if (!pannellum) return;
+
+      // Quality settings for lower-res panos
+      const sceneConfig = {
+        hfov: 110,      // Start zoomed out
+        minHfov: 80,    // Limit zooming in (to avoid pixelation)
+        maxHfov: 130,   // Limit zooming out
+        autoLoad: true,
+        type: 'equirectangular',
+        haov: 360,
+        vaov: 180,
+        backgroundColor: [0, 0, 0]
+      };
 
       const scenes = {
         entrance: {
           title: 'Welcome to Blue Pagoda',
           panorama: '/tour/entrance.png',
-          autoLoad: true
+          ...sceneConfig
         },
         pool: {
           title: 'Oasis Pool & Sun Deck',
           panorama: '/tour/pool.png',
-          autoLoad: true
+          ...sceneConfig
         },
         clubhouse: {
           title: 'Modern Clubhouse & Lounge',
           panorama: '/tour/clubhouse.png',
-          autoLoad: true
+          ...sceneConfig
         }
       };
 
@@ -47,10 +56,10 @@ const About = () => {
             default: {
               firstScene: currentScene,
               author: 'Blue Pagoda Kuta Bali',
-              sceneFadeDuration: 800
+              sceneFadeDuration: 1000,
+              hfov: 110
             },
-            scenes: scenes,
-            autoLoad: true
+            scenes: scenes
           });
         } catch (err) {
           console.error("Pannellum Error:", err);
@@ -159,6 +168,9 @@ const About = () => {
                   </div>
                 )}
               </div>
+              <p style={{ fontSize: '11px', color: '#666', marginTop: '10px' }}>
+                Tip: Use your mouse or finger to drag and look around. Total 360° immersion.
+              </p>
             </div>
           </div>
         </div>
