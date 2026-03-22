@@ -1,5 +1,5 @@
 "use client";
-// Version: V5-GLOBAL-LIB-FIX
+// Version: V6-FIX-FINAL-DEEP-AUDIT
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
@@ -13,10 +13,11 @@ const About = () => {
   useEffect(() => {
     if (showTour) {
       // @ts-ignore
-      if (typeof pannellum === 'undefined') {
-        console.warn("Pannellum not yet available. Retrying in 500ms...");
-        const timer = setTimeout(() => setShowTour(true), 500);
-        return () => clearTimeout(timer);
+      const pannellum = window.pannellum;
+
+      if (!pannellum) {
+        console.warn("Pannellum not available on window. Waiting...");
+        return;
       }
 
       const scenes = {
@@ -37,9 +38,14 @@ const About = () => {
         }
       };
 
+      const panoramaEl = document.getElementById('panorama');
+      if (!panoramaEl) {
+        console.warn("Panorama div #panorama not in DOM yet.");
+        return;
+      }
+
       if (!viewerRef.current) {
         try {
-          // @ts-ignore
           viewerRef.current = pannellum.viewer('panorama', {
             default: {
               firstScene: currentScene,
@@ -50,7 +56,7 @@ const About = () => {
             autoLoad: true
           });
         } catch (err) {
-          console.error("Pannellum Init Error:", err);
+          console.error("Pannellum Error:", err);
         }
       } else {
         viewerRef.current.loadScene(currentScene);
@@ -108,38 +114,40 @@ const About = () => {
                 Move around, look closer, and feel the tranquility.
               </p>
               
-              <div className={styles.tourContainer}>
-                {!showTour ? (
-                  <div className={styles.tourPlaceholder} onClick={() => setShowTour(true)}>
-                    <span className={styles.playIcon}>📍</span>
-                    <span>Enter Interactive 360° Tour</span>
+              {!showTour ? (
+                <div 
+                  className={styles.tourPlaceholder} 
+                  onClick={() => setShowTour(true)}
+                  style={{ display: 'flex', visibility: 'visible', opacity: 1 }}
+                >
+                  <span className={styles.playIcon}>📍</span>
+                  <span>Enter Interactive 360° Tour</span>
+                </div>
+              ) : (
+                <div className={styles.tourWrapper}>
+                  <div className={styles.sceneSwitcher}>
+                    <button 
+                      className={currentScene === 'entrance' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('entrance')}
+                    >
+                      Entrance
+                    </button>
+                    <button 
+                      className={currentScene === 'pool' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('pool')}
+                    >
+                      Pool
+                    </button>
+                    <button 
+                      className={currentScene === 'clubhouse' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('clubhouse')}
+                    >
+                      Clubhouse
+                    </button>
                   </div>
-                ) : (
-                  <div className={styles.tourWrapper}>
-                    <div className={styles.sceneSwitcher}>
-                      <button 
-                        className={currentScene === 'entrance' ? styles.activeScene : ''} 
-                        onClick={() => setCurrentScene('entrance')}
-                      >
-                        Entrance
-                      </button>
-                      <button 
-                        className={currentScene === 'pool' ? styles.activeScene : ''} 
-                        onClick={() => setCurrentScene('pool')}
-                      >
-                        Pool
-                      </button>
-                      <button 
-                        className={currentScene === 'clubhouse' ? styles.activeScene : ''} 
-                        onClick={() => setCurrentScene('clubhouse')}
-                      >
-                        Clubhouse
-                      </button>
-                    </div>
-                    <div id="panorama" className={styles.panorama}></div>
-                  </div>
-                )}
-              </div>
+                  <div id="panorama" className={styles.panorama}></div>
+                </div>
+              )}
             </div>
           </div>
         </div>
