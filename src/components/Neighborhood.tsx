@@ -1,7 +1,12 @@
 "use client";
 import React, { useState } from 'react';
 import styles from './Neighborhood.module.css';
-import InteractiveMap from './InteractiveMap';
+import dynamic from 'next/dynamic';
+
+const Map = dynamic<any>(() => import('./InteractiveMap'), { 
+  ssr: false,
+  loading: () => <div className={styles.mapPlaceholder}>Loading Map...</div>
+});
 
 const HOTSPOTS = [
   {
@@ -158,7 +163,7 @@ const Neighborhood = () => {
         </div>
         
         <div className={styles.mapConcept}>
-          <InteractiveMap activeSpot={activeSpot} hotspots={HOTSPOTS} />
+          <Map activeSpot={activeSpot} hotspots={HOTSPOTS} />
           <div className={styles.mapOverlay}>
             <p><strong>Blue Pagoda Kuta Bali</strong></p>
             <p>Jl. Poppies Lane I, Kuta</p>
