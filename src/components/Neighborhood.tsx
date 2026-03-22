@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import styles from './Neighborhood.module.css';
 import dynamic from 'next/dynamic';
