@@ -29,18 +29,21 @@
 
 .closeButton {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
+  top: 24px;
+  right: 24px;
+  background: white;
+  border: none;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--foreground);
-  z-index: 10;
-  transition: var(--transition);
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  color: var(--navy);
+  transition: all 0.3s ease;
 }
 
 .closeButton:hover {

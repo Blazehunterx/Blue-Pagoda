@@ -7,9 +7,10 @@ const About = () => {
   const [showTour, setShowTour] = useState(false);
   const viewerRef = useRef<any>(null);
 
+  const [currentScene, setCurrentScene] = useState('entrance');
+
   useEffect(() => {
     if (showTour) {
-      // Load Pannellum scripts dynamically
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css';
@@ -18,13 +19,32 @@ const About = () => {
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js';
       script.onload = () => {
+        const scenes = {
+          entrance: {
+            title: 'Welcome to Blue Pagoda',
+            panorama: '/tour/entrance.jpg',
+            autoLoad: true
+          },
+          pool: {
+            title: 'Oasis Pool & Sun Deck',
+            panorama: '/tour/pool.jpg',
+            autoLoad: true
+          },
+          clubhouse: {
+            title: 'Modern Clubhouse & Lounge',
+            panorama: '/tour/clubhouse.jpg',
+            autoLoad: true
+          }
+        };
+
         // @ts-ignore
         viewerRef.current = pannellum.viewer('panorama', {
-          type: 'equirectangular',
-          panorama: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?q=80&w=2600&auto=format&fit=crop', // High-end 360 placeholder
-          autoLoad: true,
-          title: 'Blue Pagoda Clubhouse',
-          author: 'Blue Pagoda Kuta Bali'
+          default: {
+            firstScene: currentScene,
+            author: 'Blue Pagoda Kuta Bali',
+            sceneFadeDuration: 1000
+          },
+          scenes: scenes
         });
       };
       document.body.appendChild(script);
@@ -35,7 +55,7 @@ const About = () => {
         document.body.removeChild(script);
       };
     }
-  }, [showTour]);
+  }, [showTour, currentScene]);
 
   return (
     <section id="about" className={styles.about}>
@@ -78,12 +98,30 @@ const About = () => {
               </p>
               
               {!showTour ? (
-                <div className={styles.tourPlaceholder} onClick={() => setShowTour(true)}>
-                  <span className={styles.playIcon}>📍</span>
-                  <span>Enter Interative 360° Tour</span>
-                </div>
               ) : (
-                <div id="panorama" className={styles.panorama}></div>
+                <div className={styles.tourWrapper}>
+                  <div className={styles.sceneSwitcher}>
+                    <button 
+                      className={currentScene === 'entrance' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('entrance')}
+                    >
+                      Entrance
+                    </button>
+                    <button 
+                      className={currentScene === 'pool' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('pool')}
+                    >
+                      Pool
+                    </button>
+                    <button 
+                      className={currentScene === 'clubhouse' ? styles.activeScene : ''} 
+                      onClick={() => setCurrentScene('clubhouse')}
+                    >
+                      Clubhouse
+                    </button>
+                  </div>
+                  <div id="panorama" className={styles.panorama}></div>
+                </div>
               )}
             </div>
           </div>

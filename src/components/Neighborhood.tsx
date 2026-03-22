@@ -76,6 +76,46 @@ const HOTSPOTS = [
     lng: 114.1685
   },
   {
+    name: "Lippo Mall Kuta",
+    time: "8 Mins",
+    type: "Cinema & Dining",
+    desc: "A modern mall with a great cinema, food court, and local fashion brands.",
+    lat: -8.7297,
+    lng: 115.1666
+  },
+  {
+    name: "Discovery Mall",
+    time: "10 Mins",
+    type: "Beachfront Mall",
+    desc: "One of the few malls that opens directly onto the beach. Great for sunset walks.",
+    lat: -8.7265,
+    lng: 115.1670
+  },
+  {
+    name: "Mal Bali Galeria",
+    time: "15 Mins",
+    type: "Large Shopping Hub",
+    desc: "A massive complex featuring international brands, a department store, and DFS Duty Free.",
+    lat: -8.7118,
+    lng: 115.1915
+  },
+  {
+    name: "Jimbaran Beach",
+    time: "20 Mins",
+    type: "Seafood Dining",
+    desc: "Famous for its beachfront candlelit seafood dinners. A must-visit experience.",
+    lat: -8.7692,
+    lng: 115.1673
+  },
+  {
+    name: "Legian Street",
+    time: "5 Mins",
+    type: "Nightlife & Bars",
+    desc: "The center of Bali's nightlife, filled with clubs, bars, and late-night shopping.",
+    lat: -8.7077,
+    lng: 115.1740
+  },
+  {
     name: "Local Warungs",
     time: "Walking Distance",
     type: "Authentic Food",
