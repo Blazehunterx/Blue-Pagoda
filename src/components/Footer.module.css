@@ -1,7 +1,8 @@
 .footer {
-  padding: 80px 24px 40px;
-  background: var(--navy);
+  background-color: var(--navy);
   color: white;
+  padding: 80px 24px 40px;
+  position: relative;
 }
 
 .container {
@@ -18,6 +19,7 @@
 
 .brand h3 {
   font-size: 1.5rem;
+  font-weight: 700;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
 }
@@ -32,11 +34,12 @@
 }
 
 .column h4 {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 24px;
-  opacity: 0.4;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .column p, .column a {
@@ -51,12 +54,35 @@
   opacity: 1;
 }
 
+.column ul li a:hover {
+  color: white;
+  opacity: 1;
+}
+
+.contactBtn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: white;
+  color: var(--navy);
+  border-radius: 980px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.contactBtn:hover {
+  transform: translateY(-2px);
+  background: #f0f4f8;
+}
+
 .bottom {
+  margin-top: 60px;
+  padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 40px;
   text-align: center;
-  font-size: 0.75rem;
-  opacity: 0.4;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 768px) {

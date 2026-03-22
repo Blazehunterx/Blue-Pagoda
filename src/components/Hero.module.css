@@ -6,7 +6,19 @@
   padding: 160px 24px 100px;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 10%, #ffffff 0%, #f0f4f8 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+}
+
+/* Add a decorative blue element to break the white */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(26, 54, 93, 0.03) 0%, transparent 70%);
+  z-index: 1;
 }
 
 .content {
