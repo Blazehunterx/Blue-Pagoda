@@ -1,41 +1,24 @@
 "use client";
-// Build: V4-STABLE-TOUR-FIX
+// Version: V5-GLOBAL-LIB-FIX
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
 
 const About = () => {
   const [showTour, setShowTour] = useState(false);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
   const [currentScene, setCurrentScene] = useState('entrance');
   const viewerRef = useRef<any>(null);
-  const panoramaContainerRef = useRef<HTMLDivElement>(null);
 
-  // Load Pannellum once
+  // Initialize and handle scene changes
   useEffect(() => {
-    if (showTour && !isScriptLoaded) {
-      console.log("Loading Pannellum scripts...");
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css';
-      document.head.appendChild(link);
+    if (showTour) {
+      // @ts-ignore
+      if (typeof pannellum === 'undefined') {
+        console.warn("Pannellum not yet available. Retrying in 500ms...");
+        const timer = setTimeout(() => setShowTour(true), 500);
+        return () => clearTimeout(timer);
+      }
 
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js';
-      script.onload = () => {
-        console.log("Pannellum script loaded.");
-        setIsScriptLoaded(true);
-      };
-      document.body.appendChild(script);
-    }
-  }, [showTour, isScriptLoaded]);
-
-  // Handle scene changes and initialization
-  useEffect(() => {
-    // Only proceed if showTour is true, script is loaded, and the container exists
-    if (showTour && isScriptLoaded) {
-      console.log("Attempting to initialize/switch tour scene:", currentScene);
-      
       const scenes = {
         entrance: {
           title: 'Welcome to Blue Pagoda',
@@ -54,22 +37,8 @@ const About = () => {
         }
       };
 
-      // Ensure the "panorama" ID exists in the DOM
-      const panoramaEl = document.getElementById('panorama');
-      if (!panoramaEl) {
-        console.warn("Panorama container not found in DOM yet. Retrying...");
-        return;
-      }
-
-      // @ts-ignore
-      if (typeof pannellum === 'undefined') {
-        console.error("Pannellum global object not found despite script load.");
-        return;
-      }
-
       if (!viewerRef.current) {
         try {
-          console.log("Initializing new Pannellum viewer...");
           // @ts-ignore
           viewerRef.current = pannellum.viewer('panorama', {
             default: {
@@ -81,20 +50,18 @@ const About = () => {
             autoLoad: true
           });
         } catch (err) {
-          console.error("Error initializing Pannellum:", err);
+          console.error("Pannellum Init Error:", err);
         }
       } else {
-        console.log("Loading existing scene:", currentScene);
         viewerRef.current.loadScene(currentScene);
       }
     }
-  }, [isScriptLoaded, showTour, currentScene]);
+  }, [showTour, currentScene]);
 
-  // Clean up on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (viewerRef.current) {
-        console.log("Destroying Pannellum viewer...");
         viewerRef.current.destroy();
         viewerRef.current = null;
       }
@@ -141,14 +108,14 @@ const About = () => {
                 Move around, look closer, and feel the tranquility.
               </p>
               
-              <div className={styles.tourWrapper}>
+              <div className={styles.tourContainer}>
                 {!showTour ? (
                   <div className={styles.tourPlaceholder} onClick={() => setShowTour(true)}>
                     <span className={styles.playIcon}>📍</span>
                     <span>Enter Interactive 360° Tour</span>
                   </div>
                 ) : (
-                  <>
+                  <div className={styles.tourWrapper}>
                     <div className={styles.sceneSwitcher}>
                       <button 
                         className={currentScene === 'entrance' ? styles.activeScene : ''} 
@@ -169,9 +136,8 @@ const About = () => {
                         Clubhouse
                       </button>
                     </div>
-                    {/* Panorama container is always rendered when showTour is true */}
                     <div id="panorama" className={styles.panorama}></div>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
