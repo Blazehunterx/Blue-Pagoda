@@ -1,0 +1,138 @@
+.about {
+  padding: 120px 24px;
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+}
+
+.imageCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  background: linear-gradient(transparent, rgba(26, 54, 93, 0.8));
+  color: white;
+}
+
+.imageCaption h4 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.imageCaption p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.tagline {
+  display: inline-block;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.message {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.signature {
+  font-family: inherit;
+  font-style: italic;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.tourConcept {
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.tourConcept h3 {
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.tourConcept p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.tourPlaceholder {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f0f4f8;
+  padding: 20px 40px;
+  border-radius: var(--radius-md);
+  color: var(--navy);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px dashed var(--navy);
+}
+
+.tourPlaceholder:hover {
+  background: #e1e8f0;
+  transform: translateY(-2px);
+}
+
+.playIcon {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+}
