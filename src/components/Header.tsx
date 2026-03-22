@@ -9,7 +9,7 @@ const Header = () => {
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <img 
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-hGzIYXbfj0VYWQfeG1vQkGO6e6rtoM5Hg&s" 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-hGzIYXbfj0VYWQfeG1vQkQO6e6rtoM5Hg&s" 
             alt="Blue Pagoda Logo" 
             className={styles.logoImage}
           />
@@ -19,6 +19,8 @@ const Header = () => {
         <nav className={styles.nav}>
           <a href="#rooms">Rooms</a>
           <a href="#about">About</a>
+          <a href="#community">Community</a>
+          <a href="#location">Location</a>
           <a 
           href="https://wa.me/6287818384628" 
           target="_blank" 
