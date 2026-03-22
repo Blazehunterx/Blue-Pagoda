@@ -1,5 +1,5 @@
 "use client";
-// Version: V6-FIX-FINAL-DEEP-AUDIT
+// Version: V7-EMERGENCY-FIX-VISIBILITY
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
@@ -16,7 +16,7 @@ const About = () => {
       const pannellum = window.pannellum;
 
       if (!pannellum) {
-        console.warn("Pannellum not available on window. Waiting...");
+        console.warn("Pannellum not available. Waiting...");
         return;
       }
 
@@ -39,10 +39,7 @@ const About = () => {
       };
 
       const panoramaEl = document.getElementById('panorama');
-      if (!panoramaEl) {
-        console.warn("Panorama div #panorama not in DOM yet.");
-        return;
-      }
+      if (!panoramaEl) return;
 
       if (!viewerRef.current) {
         try {
@@ -114,40 +111,54 @@ const About = () => {
                 Move around, look closer, and feel the tranquility.
               </p>
               
-              {!showTour ? (
-                <div 
-                  className={styles.tourPlaceholder} 
-                  onClick={() => setShowTour(true)}
-                  style={{ display: 'flex', visibility: 'visible', opacity: 1 }}
-                >
-                  <span className={styles.playIcon}>📍</span>
-                  <span>Enter Interactive 360° Tour</span>
-                </div>
-              ) : (
-                <div className={styles.tourWrapper}>
-                  <div className={styles.sceneSwitcher}>
-                    <button 
-                      className={currentScene === 'entrance' ? styles.activeScene : ''} 
-                      onClick={() => setCurrentScene('entrance')}
-                    >
-                      Entrance
-                    </button>
-                    <button 
-                      className={currentScene === 'pool' ? styles.activeScene : ''} 
-                      onClick={() => setCurrentScene('pool')}
-                    >
-                      Pool
-                    </button>
-                    <button 
-                      className={currentScene === 'clubhouse' ? styles.activeScene : ''} 
-                      onClick={() => setCurrentScene('clubhouse')}
-                    >
-                      Clubhouse
-                    </button>
+              <div style={{ padding: '20px 0', border: '2px solid transparent' }}>
+                {!showTour ? (
+                  <button 
+                    onClick={() => setShowTour(true)}
+                    style={{
+                      background: '#1a365d',
+                      color: 'white',
+                      padding: '16px 32px',
+                      borderRadius: '8px',
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      border: 'none',
+                      boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px'
+                    }}
+                  >
+                    <span>📍</span>
+                    <span>Enter Interactive 360° Tour</span>
+                  </button>
+                ) : (
+                  <div className={styles.tourWrapper}>
+                    <div className={styles.sceneSwitcher}>
+                      <button 
+                        className={currentScene === 'entrance' ? styles.activeScene : ''} 
+                        onClick={() => setCurrentScene('entrance')}
+                      >
+                        Entrance
+                      </button>
+                      <button 
+                        className={currentScene === 'pool' ? styles.activeScene : ''} 
+                        onClick={() => setCurrentScene('pool')}
+                      >
+                        Pool
+                      </button>
+                      <button 
+                        className={currentScene === 'clubhouse' ? styles.activeScene : ''} 
+                        onClick={() => setCurrentScene('clubhouse')}
+                      >
+                        Clubhouse
+                      </button>
+                    </div>
+                    <div id="panorama" className={styles.panorama} style={{ minHeight: '450px' }}></div>
                   </div>
-                  <div id="panorama" className={styles.panorama}></div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>

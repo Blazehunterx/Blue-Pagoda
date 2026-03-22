@@ -1,27 +1,9 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-// Fix for default marker icons in Leaflet + Next.js
-const DefaultIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-
-L.Marker.prototype.options.icon = DefaultIcon;
-
-// Specialty icon for Blue Pagoda
-const BrandIcon = L.icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [30, 46],
-  iconAnchor: [15, 46],
-});
 
 interface InteractiveMapProps {
   activeSpot: any;
@@ -37,6 +19,42 @@ const RecenterMap = ({ lat, lng }: { lat: number, lng: number }) => {
 };
 
 const InteractiveMap = ({ activeSpot, hotspots }: InteractiveMapProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Fix for default marker icons in Leaflet + Next.js
+    // This must run inside useEffect to avoid "window is not defined" during build
+    // @ts-ignore
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+    setIsMounted(true);
+  }, []);
+
+  const BrandIcon = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    return L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [30, 46],
+      iconAnchor: [15, 46],
+    });
+  }, []);
+
+  const DefaultIcon = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    return L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+    });
+  }, []);
+
+  if (!isMounted) return <div style={{ height: '100%', width: '100%', background: '#f8fafc' }} />;
+
   return (
     <MapContainer 
       center={[activeSpot.lat, activeSpot.lng]} 
@@ -52,7 +70,7 @@ const InteractiveMap = ({ activeSpot, hotspots }: InteractiveMapProps) => {
         <Marker 
           key={i} 
           position={[spot.lat, spot.lng]}
-          icon={spot.name === "Blue Pagoda Kuta Bali" ? BrandIcon : DefaultIcon}
+          icon={spot.name === "Blue Pagoda Kuta Bali" ? (BrandIcon || undefined) : (DefaultIcon || undefined)}
         >
           <Popup>
             <strong>{spot.name}</strong><br/>
