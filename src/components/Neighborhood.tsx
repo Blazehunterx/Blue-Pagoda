@@ -86,9 +86,16 @@ const Neighborhood = () => {
         </div>
         
         <div className={styles.mapConcept}>
-          <div className={styles.mapPlaceholder}>
-            <span>[ Interactive Neighborhood Map ]</span>
-          </div>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15774.223847372295!2d115.1668858871582!3d-8.71188169999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd246bc4113e11f%3A0xe544158913955684!2sJl.%20Poppies%20I%2C%20Kuta%2C%20Kec.%20Kuta%2C%20Kabupaten%20Badung%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen={true} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className={styles.mapFrame}
+          ></iframe>
           <div className={styles.mapOverlay}>
             <p><strong>Blue Pagoda Kuta Bali</strong></p>
             <p>Jl. Poppies Lane I, Kuta</p>
