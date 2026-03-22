@@ -56,8 +56,8 @@ const About = () => {
           </div>
           
           <div className={styles.textColumn}>
-            <span className={styles.tagline}>A Personal Welcome</span>
-            <h2 className={styles.title}>Your Hosts</h2>
+            <span className={styles.tagline}>Our Philosophy</span>
+            <h2 className={styles.title}>A Letter from the Founder</h2>
             <div className={styles.message}>
               <p>
                 "When we founded Blue Pagoda Kuta Bali, our goal was to create more than just a place to stay. 

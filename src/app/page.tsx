@@ -1,7 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import RoomGallery from "@/components/RoomGallery";
+import RoomGallery from '@/components/RoomGallery';
 import About from '@/components/About';
+import Neighborhood from '@/components/Neighborhood';
+import FAQ from '@/components/FAQ';
 import Footer from "@/components/Footer";
 import styles from "./page.module.css";
 
@@ -14,6 +16,8 @@ export default function Home() {
         <RoomGallery />
       </main>
       <About />
+      <Neighborhood />
+      <FAQ />
       <Footer />
     </div>
   );
