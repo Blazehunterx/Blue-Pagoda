@@ -1,5 +1,5 @@
 "use client";
-// Version: V9-WIDE-VIEW-RESOLUTION-FIX
+// Version: V10-NO-BLACK-BORDERS-FIX
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
@@ -17,38 +17,50 @@ const About = () => {
 
       if (!pannellum) return;
 
-      // Settings for "Wide Panorama" (Partial View)
-      // This avoids the stretching seen in 360 mode
+      // Settings for "Seamless Wide-View" (No black borders)
       const sceneConfig = {
-        hfov: 120,        // Start zoomed out for more clarity
-        minHfov: 100,      // Prevent zooming in too much on pixels
+        hfov: 110,
+        minHfov: 80,
         maxHfov: 130,
         autoLoad: true,
         type: 'equirectangular',
-        haov: 200,        // Limit horizontal view to 200 degrees (natural for phone panos)
-        vaov: 80,         // Limit vertical view
+        haov: 150,        // Horizontal Angle of View (covers the image width)
+        vaov: 80,         // Vertical Angle of View
         vOffset: 0,
-        backgroundColor: [0, 0, 0],
+        // STRICT LIMITS: This prevents seeing the "black void"
+        minLon: -75,      // Half of haov
+        maxLon: 75,       // Half of haov
+        minLat: -30,
+        maxLat: 30,
+        backgroundColor: [26, 54, 93], // Match our Navy theme instead of black
         compass: false,
-        zoomControl: true,
-        mouseZoom: false  // Disable scroll-to-zoom to prevent accidental pixelation
+        mouseZoom: false
       };
 
       const scenes = {
         entrance: {
           title: 'Welcome to Blue Pagoda',
           panorama: '/tour/entrance.png',
-          ...sceneConfig
+          ...sceneConfig,
+          haov: 180,      // Entrance is a bit wider
+          minLon: -90,
+          maxLon: 90
         },
         pool: {
           title: 'Oasis Pool & Sun Deck',
           panorama: '/tour/pool.png',
-          ...sceneConfig
+          ...sceneConfig,
+          haov: 200,
+          minLon: -100,
+          maxLon: 100
         },
         clubhouse: {
           title: 'Modern Clubhouse & Lounge',
           panorama: '/tour/clubhouse.png',
-          ...sceneConfig
+          ...sceneConfig,
+          haov: 160,
+          minLon: -80,
+          maxLon: 80
         }
       };
 
@@ -61,7 +73,7 @@ const About = () => {
             default: {
               firstScene: currentScene,
               author: 'Blue Pagoda Kuta Bali',
-              sceneFadeDuration: 1000
+              sceneFadeDuration: 800
             },
             scenes: scenes
           });
@@ -118,13 +130,13 @@ const About = () => {
             </div>
             
             <div className={styles.tourSection}>
-              <h3 className={styles.tourTitle}>Interactive Wide-View Tour</h3>
+              <h3 className={styles.tourTitle}>Interactive Virtual Experience</h3>
               <p className={styles.tourDesc}>
-                Explore the high-definition details of our Clubhouse and pool deck. 
-                Drag to pan across the beautiful Balinese night sky.
+                Take a high-definition look at our residence. Drag to explore the clubhouse, 
+                pool, and entrance in full detail.
               </p>
               
-              <div className={styles.tourContainer}>
+              <div style={{ padding: '20px 0' }}>
                 {!showTour ? (
                   <button 
                     onClick={() => setShowTour(true)}
@@ -140,12 +152,11 @@ const About = () => {
                       boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '12px',
-                      transition: 'all 0.3s ease'
+                      gap: '12px'
                     }}
                   >
                     <span>🧭</span>
-                    <span>Experience Wide-View HD Tour</span>
+                    <span>Experience Full HD Tour</span>
                   </button>
                 ) : (
                   <div className={styles.tourWrapper}>
@@ -169,7 +180,7 @@ const About = () => {
                         Clubhouse
                       </button>
                     </div>
-                    <div id="panorama" className={styles.panorama} style={{ minHeight: '450px', background: '#000' }}></div>
+                    <div id="panorama" className={styles.panorama} style={{ minHeight: '450px', background: '#1a365d' }}></div>
                   </div>
                 )}
               </div>
