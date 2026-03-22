@@ -1,4 +1,5 @@
 "use client";
+// Build: V2-FIX-SYNTAX
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
