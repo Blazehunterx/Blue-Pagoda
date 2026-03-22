@@ -104,17 +104,20 @@
 }
 
 .tourPlaceholder {
-  display: flex;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   align-items: center;
   gap: 16px;
   background: var(--navy);
   color: white;
-  padding: 16px 32px;
+  padding: 20px 40px;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 10px 20px rgba(26, 54, 93, 0.15);
+  box-shadow: 0 10px 25px rgba(26, 54, 93, 0.2);
+  width: fit-content;
 }
 
 .tourPlaceholder:hover {
