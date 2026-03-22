@@ -3,6 +3,13 @@ import styles from './Neighborhood.module.css';
 
 const HOTSPOTS = [
   {
+    name: "Pepe & Poekie",
+    time: "At Residence",
+    type: "Our Local Indonesian Kitchen",
+    desc: "Authentic Indonesian flavors from one of our own residents. Highly recommended for a local culinary journey.",
+    link: "https://poekie-pepe-menu.vercel.app/"
+  },
+  {
     name: "Kuta Beach",
     time: "2 Mins",
     type: "Surfing & Sunsets",
@@ -40,17 +47,24 @@ const Neighborhood = () => {
           </p>
         </div>
         
-        <div className={styles.grid}>
-          {HOTSPOTS.map((spot, i) => (
-            <div key={i} className={styles.card}>
-              <div className={styles.cardInfo}>
-                <span className={styles.timeLabel}>{spot.time}</span>
-                <h3 className={spot.name}>{spot.name}</h3>
-                <span className={styles.type}>{spot.type}</span>
-                <p className={styles.desc}>{spot.desc}</p>
+        <div className={styles.scrollWrapper}>
+          <div className={styles.grid}>
+            {HOTSPOTS.map((spot, i) => (
+              <div key={i} className={styles.card}>
+                <div className={styles.cardInfo}>
+                  <span className={styles.timeLabel}>{spot.time}</span>
+                  <h3 className={styles.cardTitle}>{spot.name}</h3>
+                  <span className={styles.type}>{spot.type}</span>
+                  <p className={styles.desc}>{spot.desc}</p>
+                  {spot.link && (
+                    <a href={spot.link} target="_blank" rel="noopener noreferrer" className={styles.menuLink}>
+                      View Menu →
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         
         <div className={styles.mapConcept}>

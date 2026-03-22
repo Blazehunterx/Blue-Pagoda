@@ -36,20 +36,42 @@
   font-size: 1.1rem;
 }
 
+.scrollWrapper {
+  margin: 0 -24px;
+  padding: 10px 24px 40px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollWrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollWrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scrollWrapper::-webkit-scrollbar-thumb {
+  background: var(--navy);
+  border-radius: 10px;
+}
+
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 32px;
-  margin-bottom: 80px;
+  display: flex;
+  gap: 24px;
+  padding-bottom: 20px;
 }
 
 .card {
+  flex: 0 0 320px;
   background: white;
   padding: 40px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -59,20 +81,21 @@
 }
 
 .timeLabel {
-  background: #f0f4f8;
-  color: var(--navy);
+  background: var(--navy);
+  color: white;
   padding: 4px 12px;
   border-radius: 980px;
   font-size: 0.75rem;
   font-weight: 700;
   display: inline-block;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.card h3 {
-  font-size: 1.25rem;
+.cardTitle {
+  font-size: 1.4rem;
   margin-bottom: 8px;
   color: var(--navy);
+  font-weight: 700;
 }
 
 .type {
@@ -87,6 +110,22 @@
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.menuLink {
+  margin-top: auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.menuLink:hover {
+  color: var(--accent);
+  padding-left: 5px;
 }
 
 .mapConcept {
