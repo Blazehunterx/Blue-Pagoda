@@ -1,4 +1,6 @@
 import Header from "@/components/Header";
+"use client";
+
 import Hero from "@/components/Hero";
 import RoomGallery from '@/components/RoomGallery';
 import About from '@/components/About';

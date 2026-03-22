@@ -1,17 +1,18 @@
 "use client";
-// Build: V2-FIX-SYNTAX
+// Build: V3-ROBUST-TOUR
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
 
 const About = () => {
   const [showTour, setShowTour] = useState(false);
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+  const [currentScene, setCurrentScene] = useState('entrance');
   const viewerRef = useRef<any>(null);
 
-  const [currentScene, setCurrentScene] = useState('entrance');
-
+  // Load Pannellum once
   useEffect(() => {
-    if (showTour) {
+    if (showTour && !isScriptLoaded) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css';
@@ -19,44 +20,63 @@ const About = () => {
 
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js';
-      script.onload = () => {
-        const scenes = {
-          entrance: {
-            title: 'Welcome to Blue Pagoda',
-            panorama: '/tour/entrance.png',
-            autoLoad: true
-          },
-          pool: {
-            title: 'Oasis Pool & Sun Deck',
-            panorama: '/tour/pool.png',
-            autoLoad: true
-          },
-          clubhouse: {
-            title: 'Modern Clubhouse & Lounge',
-            panorama: '/tour/clubhouse.png',
-            autoLoad: true
-          }
-        };
+      script.onload = () => setIsScriptLoaded(true);
+      document.body.appendChild(script);
+    }
+  }, [showTour, isScriptLoaded]);
 
+  // Handle scene changes
+  useEffect(() => {
+    if (isScriptLoaded && showTour) {
+      const scenes = {
+        entrance: {
+          title: 'Welcome to Blue Pagoda',
+          panorama: '/tour/entrance.png',
+          autoLoad: true
+        },
+        pool: {
+          title: 'Oasis Pool & Sun Deck',
+          panorama: '/tour/pool.png',
+          autoLoad: true
+        },
+        clubhouse: {
+          title: 'Modern Clubhouse & Lounge',
+          panorama: '/tour/clubhouse.png',
+          autoLoad: true
+        }
+      };
+
+      if (!viewerRef.current) {
+        // Initialize viewer
         // @ts-ignore
         viewerRef.current = pannellum.viewer('panorama', {
           default: {
             firstScene: currentScene,
             author: 'Blue Pagoda Kuta Bali',
-            sceneFadeDuration: 1000
+            sceneFadeDuration: 800
           },
-          scenes: scenes
+          scenes: scenes,
+          autoLoad: true
         });
-      };
-      document.body.appendChild(script);
-
-      return () => {
-        if (viewerRef.current) viewerRef.current.destroy();
-        document.head.removeChild(link);
-        document.body.removeChild(script);
-      };
+      } else {
+        // Switch scene smoothly
+        viewerRef.current.loadScene(currentScene);
+      }
     }
-  }, [showTour, currentScene]);
+
+    return () => {
+      // Don't destroy on every scene change, only if component unmounts
+    };
+  }, [isScriptLoaded, showTour, currentScene]);
+
+  // Clean up on unmount
+  useEffect(() => {
+    return () => {
+      if (viewerRef.current) {
+        viewerRef.current.destroy();
+      }
+    };
+  }, []);
 
   return (
     <section id="about" className={styles.about}>
