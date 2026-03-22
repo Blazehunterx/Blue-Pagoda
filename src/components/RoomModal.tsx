@@ -7,12 +7,9 @@ import styles from './RoomModal.module.css';
 interface Room {
   id: number;
   name: string;
-  price: string;
+  idrPrice: string;
   image: string;
-  description?: string;
-  sqm?: number;
-  beds?: number;
-  amenities?: string[];
+  electricity: string;
 }
 
 interface RoomModalProps {
@@ -25,13 +22,13 @@ const RoomModal = ({ room, onClose }: RoomModalProps) => {
 
   // Placeholder details
   const details = {
-    sqm: room.sqm || 45,
-    beds: room.beds || 1,
-    description: room.description || "Experience unparalleled luxury in our masterfully designed suites. Each room offers a seamless blend of traditional Balinese architecture and modern Apple-inspired minimalism.",
+    sqm: 45,
+    beds: 1,
+    description: "Experience unparalleled luxury in our masterfully designed suites. Each room offers a seamless blend of traditional Balinese architecture and modern Apple-inspired minimalism.",
     features: [
       { icon: <Square size={18} />, label: "45 sqm Area" },
+      { icon: <Wind size={18} />, label: room.electricity },
       { icon: <Home size={18} />, label: "Master Bedroom" },
-      { icon: <Wind size={18} />, label: "Air Conditioning" },
       { icon: <Waves size={18} />, label: "Pool Access" }
     ]
   };
@@ -48,18 +45,11 @@ const RoomModal = ({ room, onClose }: RoomModalProps) => {
             <div className={styles.mainImage}>
               <img src={room.image} alt={room.name} />
             </div>
-            <div className={styles.thumbnails}>
-              {[1, 2, 3].map(i => (
-                <div key={i} className={styles.thumb}>
-                  <img src={room.image} alt={`${room.name} view ${i}`} />
-                </div>
-              ))}
-            </div>
           </div>
 
           <div className={styles.info}>
             <h2 className={styles.title}>{room.name}</h2>
-            <p className={styles.price}>{room.price} <span className={styles.perNight}>per night</span></p>
+            <p className={styles.price}>{room.idrPrice} <span className={styles.perNight}>per month</span></p>
             
             <div className={styles.featuresGrid}>
               {details.features.map((feature, i) => (

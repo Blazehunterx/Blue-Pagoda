@@ -10,16 +10,35 @@ import RoomModal from './RoomModal';
 interface Room {
   id: number;
   name: string;
-  price: string;
+  idrPrice: string;
   image: string;
+  electricity: string;
 }
 
-const STATIC_ROOMS: Room[] = Array.from({ length: 24 }, (_, i) => ({
-  id: i + 1,
-  name: `Deluxe Suite ${i + 1}`,
-  price: "$120",
-  image: `https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&room=${i + 1}`
-}));
+const STATIC_ROOMS: Room[] = Array.from({ length: 24 }, (_, i) => {
+  const id = i + 1;
+  let price = "8.5M IDR";
+  let electricity = "Including Electricity";
+  
+  if (id === 1) {
+    price = "18M IDR";
+    electricity = "Excluding Electricity";
+  } else if (id === 2) {
+    price = "12M IDR";
+    electricity = "Excluding Electricity";
+  } else if (id >= 22) {
+    price = "4.5M IDR";
+    electricity = "Including Electricity";
+  }
+
+  return {
+    id,
+    name: `Residence Room ${id}`,
+    idrPrice: price,
+    electricity,
+    image: `https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&room=${id}`
+  };
+});
 
 const RoomGallery = () => {
   const [rooms, setRooms] = useState<Room[]>(STATIC_ROOMS);
