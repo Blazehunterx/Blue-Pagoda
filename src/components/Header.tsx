@@ -1,14 +1,20 @@
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import Link from 'next/link'; // Assuming Next.js Link component based on the instruction
 import styles from './Header.module.css';
 
 const Header = () => {
   return (
     <header className={`${styles.header} glass`}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          <span className={styles.logoText}>BLUE PAGODA</span>
-        </div>
+        <Link href="/" className={styles.logo}>
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-hGzIYXbfj0VYWQfeG1vQkGO6e6rtoM5Hg&s" 
+            alt="Blue Pagoda Logo" 
+            className={styles.logoImage}
+          />
+          <span className={styles.logoText}>Blue Pagoda</span>
+        </Link>
         
         <nav className={styles.nav}>
           <a href="#rooms">Rooms</a>

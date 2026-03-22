@@ -25,6 +25,12 @@
   letter-spacing: -0.02em;
 }
 
+.logoImage {
+  height: 32px;
+  width: 32px;
+  border-radius: 4px;
+}
+
 .logoText {
   color: var(--navy);
 }

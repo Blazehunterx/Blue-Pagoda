@@ -7,11 +7,13 @@ const Hero = () => {
       <div className={styles.content}>
         <div className={styles.logoBadge}>
           {/* Stylized Pagoda Icon */}
-          <div className={styles.pagodaIcon}>
-            <div className={styles.tier3}></div>
-            <div className={styles.tier2}></div>
-            <div className={styles.tier1}></div>
-          </div>
+          <div className={styles.logoContainer}>
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-hGzIYXbfj0VYWQfeG1vQkGO6e6rtoM5Hg&s" 
+            alt="Blue Pagoda Official Logo" 
+            className={styles.heroLogo}
+          />
+        </div>
         </div>
         <h1 className="hero-title">Blue Pagoda</h1>
         <p className="sub-title">Kuta Bali</p>
