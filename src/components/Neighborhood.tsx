@@ -1,59 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Neighborhood.module.css';
+import dynamic from 'next/dynamic';
+
+const Map = dynamic<any>(() => import('./InteractiveMap'), { 
+  ssr: false,
+  loading: () => <div className={styles.mapPlaceholder}>Loading Map...</div>
+});
 
 const HOTSPOTS = [
+  {
+    name: "Blue Pagoda Kuta Bali",
+    time: "You Are Here",
+    type: "Our Residence",
+    desc: "Your home base in Kuta. A serene sanctuary just steps from the action.",
+    lat: -8.7171,
+    lng: 115.1685
+  },
   {
     name: "Pepe & Poekie",
     time: "At Residence",
     type: "Our Local Indonesian Kitchen",
     desc: "Authentic Indonesian flavors from one of our own residents. Highly recommended for a local culinary journey.",
-    link: "https://poekie-pepe-menu.vercel.app/"
+    link: "https://poekie-pepe-menu.vercel.app/",
+    lat: -8.7188,
+    lng: 115.1685
   },
   {
     name: "Kuta Beach",
     time: "2 Mins",
     type: "Surfing & Sunsets",
-    desc: "The heartbeat of Bali, just a short stroll away."
+    desc: "The heartbeat of Bali, just a short stroll away.",
+    lat: -8.7185,
+    lng: 115.1686
   },
   {
     name: "Poppies Lane I & II",
     time: "1 Min",
     type: "Dining & Shopping",
-    desc: "Explore famous local eateries and boutique shops."
+    desc: "Explore famous local eateries and boutique shops.",
+    lat: -8.7161,
+    lng: 115.1706
   },
   {
     name: "Beachwalk Mall",
     time: "5 Mins",
     type: "Luxury Shopping",
-    desc: "World-class brands and cinema experience nearby."
+    desc: "World-class brands and cinema experience nearby.",
+    lat: -8.7135,
+    lng: 115.1685
   },
   {
     name: "Ngurah Rai Airport",
     time: "15-20 Mins",
     type: "Global Connection",
-    desc: "Quick access to the international airport for seamless arrivals and departures."
+    desc: "Quick access to the international airport for seamless arrivals and departures.",
+    lat: -8.7482,
+    lng: 115.1671
   },
   {
     name: "Waterbom Bali",
     time: "10 Mins",
     type: "Family & Fun",
-    desc: "Asia's #1 waterpark, perfect for a day of excitement and relaxation."
+    desc: "Asia's #1 waterpark, perfect for a day of excitement and relaxation.",
+    lat: -8.7261,
+    lng: 115.1673
   },
   {
     name: "Kuta Art Market",
     time: "5 Mins",
     type: "Local Crafts",
-    desc: "Discover unique Balinese souvenirs and traditional handcrafted items."
+    desc: "Discover unique Balinese souvenirs and traditional handcrafted items.",
+    lat: -8.7212,
+    lng: 114.1685
   },
   {
     name: "Local Warungs",
     time: "Walking Distance",
     type: "Authentic Food",
-    desc: "The best Nasi Campur is right around the corner."
+    desc: "The best Nasi Campur is right around the corner.",
+    lat: -8.7175,
+    lng: 115.1695
   }
 ];
 
 const Neighborhood = () => {
+  const [activeSpot, setActiveSpot] = useState(HOTSPOTS[0]);
+
   return (
     <section id="location" className={styles.neighborhood}>
       <div className={styles.container}>
@@ -68,7 +100,11 @@ const Neighborhood = () => {
         <div className={styles.scrollWrapper}>
           <div className={styles.grid}>
             {HOTSPOTS.map((spot, i) => (
-              <div key={i} className={styles.card}>
+              <div 
+                key={i} 
+                className={`${styles.card} ${activeSpot.name === spot.name ? styles.activeCard : ''}`}
+                onClick={() => setActiveSpot(spot)}
+              >
                 <div className={styles.cardInfo}>
                   <span className={styles.timeLabel}>{spot.time}</span>
                   <h3 className={styles.cardTitle}>{spot.name}</h3>
@@ -86,16 +122,7 @@ const Neighborhood = () => {
         </div>
         
         <div className={styles.mapConcept}>
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15774.223847372295!2d115.1668858871582!3d-8.71188169999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd246bc4113e11f%3A0xe544158913955684!2sJl.%20Poppies%20I%2C%20Kuta%2C%20Kec.%20Kuta%2C%20Kabupaten%20Badung%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen={true} 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-            className={styles.mapFrame}
-          ></iframe>
+          <Map activeSpot={activeSpot} hotspots={HOTSPOTS} />
           <div className={styles.mapOverlay}>
             <p><strong>Blue Pagoda Kuta Bali</strong></p>
             <p>Jl. Poppies Lane I, Kuta</p>
