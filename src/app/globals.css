@@ -80,17 +80,19 @@ button {
   font-weight: 400;
 }
 
-/* Button Variants */
 .btn-primary {
-  background: var(--accent);
+  background: var(--navy);
   color: white;
-  padding: 12px 24px;
+  padding: 12px 26px;
   border-radius: 980px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
   transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(26, 54, 93, 0.2);
 }
 
 .btn-primary:hover {
-  background: #0077ed;
-  transform: scale(1.02);
+  background: var(--navy-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(26, 54, 93, 0.3);
 }
