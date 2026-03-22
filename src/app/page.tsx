@@ -1,4 +1,5 @@
 "use client";
+// Version: V3-STABLE-PRODUCTION
 
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
