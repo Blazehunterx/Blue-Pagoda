@@ -41,13 +41,27 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 }
 
-.nav a:not(.btn-primary) {
-  color: var(--foreground);
-  opacity: 0.8;
+.nav a {
+  text-decoration: none;
+  color: var(--navy);
+  font-weight: 500;
+  font-size: 0.95rem;
   transition: var(--transition);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    gap: 12px;
+  }
+  .nav a {
+    font-size: 0.85rem;
+  }
+  .logoText {
+    display: none;
+  }
 }
 
 .nav a:not(.btn-primary):hover {

@@ -1,5 +1,5 @@
 "use client";
-// Version: V8-QUALITY-OPTIMIZATION
+// Version: V9-WIDE-VIEW-RESOLUTION-FIX
 
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './About.module.css';
@@ -17,16 +17,21 @@ const About = () => {
 
       if (!pannellum) return;
 
-      // Quality settings for lower-res panos
+      // Settings for "Wide Panorama" (Partial View)
+      // This avoids the stretching seen in 360 mode
       const sceneConfig = {
-        hfov: 110,      // Start zoomed out
-        minHfov: 80,    // Limit zooming in (to avoid pixelation)
-        maxHfov: 130,   // Limit zooming out
+        hfov: 120,        // Start zoomed out for more clarity
+        minHfov: 100,      // Prevent zooming in too much on pixels
+        maxHfov: 130,
         autoLoad: true,
         type: 'equirectangular',
-        haov: 360,
-        vaov: 180,
-        backgroundColor: [0, 0, 0]
+        haov: 200,        // Limit horizontal view to 200 degrees (natural for phone panos)
+        vaov: 80,         // Limit vertical view
+        vOffset: 0,
+        backgroundColor: [0, 0, 0],
+        compass: false,
+        zoomControl: true,
+        mouseZoom: false  // Disable scroll-to-zoom to prevent accidental pixelation
       };
 
       const scenes = {
@@ -56,8 +61,7 @@ const About = () => {
             default: {
               firstScene: currentScene,
               author: 'Blue Pagoda Kuta Bali',
-              sceneFadeDuration: 1000,
-              hfov: 110
+              sceneFadeDuration: 1000
             },
             scenes: scenes
           });
@@ -114,33 +118,34 @@ const About = () => {
             </div>
             
             <div className={styles.tourSection}>
-              <h3 className={styles.tourTitle}>360° Virtual Walkthrough</h3>
+              <h3 className={styles.tourTitle}>Interactive Wide-View Tour</h3>
               <p className={styles.tourDesc}>
-                Experience the atmosphere of our clubhouse and residences from anywhere in the world. 
-                Move around, look closer, and feel the tranquility.
+                Explore the high-definition details of our Clubhouse and pool deck. 
+                Drag to pan across the beautiful Balinese night sky.
               </p>
               
-              <div style={{ padding: '20px 0', border: '2px solid transparent' }}>
+              <div className={styles.tourContainer}>
                 {!showTour ? (
                   <button 
                     onClick={() => setShowTour(true)}
                     style={{
                       background: '#1a365d',
                       color: 'white',
-                      padding: '16px 32px',
-                      borderRadius: '8px',
+                      padding: '20px 40px',
+                      borderRadius: '12px',
                       fontSize: '18px',
                       fontWeight: 'bold',
                       cursor: 'pointer',
                       border: 'none',
-                      boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '12px'
+                      gap: '12px',
+                      transition: 'all 0.3s ease'
                     }}
                   >
-                    <span>📍</span>
-                    <span>Enter Interactive 360° Tour</span>
+                    <span>🧭</span>
+                    <span>Experience Wide-View HD Tour</span>
                   </button>
                 ) : (
                   <div className={styles.tourWrapper}>
@@ -164,13 +169,10 @@ const About = () => {
                         Clubhouse
                       </button>
                     </div>
-                    <div id="panorama" className={styles.panorama} style={{ minHeight: '450px' }}></div>
+                    <div id="panorama" className={styles.panorama} style={{ minHeight: '450px', background: '#000' }}></div>
                   </div>
                 )}
               </div>
-              <p style={{ fontSize: '11px', color: '#666', marginTop: '10px' }}>
-                Tip: Use your mouse or finger to drag and look around. Total 360° immersion.
-              </p>
             </div>
           </div>
         </div>
