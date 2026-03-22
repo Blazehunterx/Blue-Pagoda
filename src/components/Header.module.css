@@ -1,38 +1,40 @@
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
+  width: 100%;
+  padding: 12px 24px;
   z-index: 1000;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .logoImage {
-  height: 32px;
-  width: 32px;
-  border-radius: 4px;
+  height: 28px;
+  width: 28px;
+  border-radius: 6px;
 }
 
 .logoText {
   color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
 }
 
 .nav {
@@ -42,8 +44,6 @@
 }
 
 .nav a:not(.btn-primary) {
-  font-size: 0.875rem;
-  font-weight: 500;
   color: var(--foreground);
   opacity: 0.8;
   transition: var(--transition);

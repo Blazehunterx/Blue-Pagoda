@@ -6,15 +6,16 @@ interface RoomCardProps {
   name: string;
   image: string;
   price: string;
+  onViewDetails: () => void;
 }
 
-const RoomCard: React.FC<RoomCardProps> = ({ name, image, price }) => {
+const RoomCard: React.FC<RoomCardProps> = ({ name, image, price, onViewDetails }) => {
   return (
     <div className={styles.card}>
-      <div className={styles.imageWrapper}>
+      <div className={styles.imageContainer}>
         <img src={image} alt={name} className={styles.image} loading="lazy" />
         <div className={styles.overlay}>
-          <button className="btn-primary">View Details</button>
+          <button className={styles.button} onClick={onViewDetails}>View Details</button>
         </div>
       </div>
       <div className={styles.info}>
