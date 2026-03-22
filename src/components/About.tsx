@@ -22,17 +22,17 @@ const About = () => {
         const scenes = {
           entrance: {
             title: 'Welcome to Blue Pagoda',
-            panorama: '/tour/entrance.jpg',
+            panorama: '/tour/entrance.png',
             autoLoad: true
           },
           pool: {
             title: 'Oasis Pool & Sun Deck',
-            panorama: '/tour/pool.jpg',
+            panorama: '/tour/pool.png',
             autoLoad: true
           },
           clubhouse: {
             title: 'Modern Clubhouse & Lounge',
-            panorama: '/tour/clubhouse.jpg',
+            panorama: '/tour/clubhouse.png',
             autoLoad: true
           }
         };
@@ -98,6 +98,10 @@ const About = () => {
               </p>
               
               {!showTour ? (
+                <div className={styles.tourPlaceholder} onClick={() => setShowTour(true)}>
+                  <span className={styles.playIcon}>📍</span>
+                  <span>Enter Interactive 360° Tour</span>
+                </div>
               ) : (
                 <div className={styles.tourWrapper}>
                   <div className={styles.sceneSwitcher}>
