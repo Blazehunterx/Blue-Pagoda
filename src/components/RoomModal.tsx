@@ -72,7 +72,7 @@ const RoomModal = ({ room, onClose }: RoomModalProps) => {
 
             <p className={styles.description}>{details.description}</p>
 
-            <button className={styles.bookButton} onClick={() => window.open('https://wa.me/628123456789', '_blank')}>
+            <button className={styles.bookButton} onClick={() => window.open('https://wa.me/6287818384628', '_blank')}>
               Book This Room
             </button>
           </div>

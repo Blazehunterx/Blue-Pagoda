@@ -20,8 +20,11 @@ const Footer = () => {
             <div className={styles.column}>
               <h4>Contact</h4>
               <p>Gg. Sorga Jl. Poppies Lane I</p>
-              <p>Kuta, Bali 80361</p>
-              <p>WhatsApp: +62 812 3456 789</p>
+              <p>Kuta Bali, Indonesia</p>
+              <p>WhatsApp: +62 878 1838 4628</p>
+              <a href="https://wa.me/6287818384628" className={styles.contactBtn}>
+                Chat with us
+              </a>
             </div>
           </div>
         </div>
