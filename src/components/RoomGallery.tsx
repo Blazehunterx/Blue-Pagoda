@@ -17,7 +17,7 @@ interface Room {
 
 const STATIC_ROOMS: Room[] = Array.from({ length: 6 }, (_, i) => {
   const id = i + 1;
-  const price = "5.5M IDR";
+  const price = "8.5M IDR";
   const electricity = "Including Electricity";
   const imgId = (i % 4) + 1;
 
