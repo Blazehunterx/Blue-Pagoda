@@ -16,10 +16,10 @@ const Hero = () => {
         </div>
         </div>
         <h1 className="hero-title">Blue Pagoda</h1>
-        <p className="sub-title">Kuta Bali</p>
+        <p className="sub-title">Your Peaceful Family Home in Bali</p>
         <div className={styles.description}>
-          Experience modern tranquility in the heart of Bali.
-          A premium residence designed for clarity and comfort.
+          Experience quiet, comfortable living at a fair price. 
+          The best value sanctuary in Kuta, perfectly designed for families.
         </div>
         <div className={styles.ctaGroup}>
           <a href="#rooms" className="btn-primary">Explore Rooms</a>

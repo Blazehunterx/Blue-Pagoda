@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Blue Pagoda Kuta Bali | Premium Residence",
-  description: "Experience the ultimate stay at Blue Pagoda Kuta Bali. Modern rooms, luxury service, and the heart of Bali.",
+  title: "Blue Pagoda Kuta Bali | Peaceful Family Residence",
+  description: "Affordable, quiet, and comfortable living in the heart of Kuta. The best value family residence in Bali.",
 };
 
 export default function RootLayout({
