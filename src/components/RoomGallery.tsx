@@ -15,28 +15,18 @@ interface Room {
   electricity: string;
 }
 
-const STATIC_ROOMS: Room[] = Array.from({ length: 24 }, (_, i) => {
+const STATIC_ROOMS: Room[] = Array.from({ length: 6 }, (_, i) => {
   const id = i + 1;
-  let price = "8.5M IDR";
-  let electricity = "Including Electricity";
-  
-  if (id === 1) {
-    price = "18M IDR";
-    electricity = "Excluding Electricity";
-  } else if (id === 2) {
-    price = "12M IDR";
-    electricity = "Excluding Electricity";
-  } else if (id >= 22) {
-    price = "4.5M IDR";
-    electricity = "Including Electricity";
-  }
+  const price = "5.5M IDR";
+  const electricity = "Including Electricity";
+  const imgId = (i % 4) + 1;
 
   return {
     id,
     name: `Residence Room ${id}`,
     idrPrice: price,
     electricity,
-    image: `https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&room=${id}`
+    image: `/rooms/room-${imgId}.jpg`
   };
 });
 

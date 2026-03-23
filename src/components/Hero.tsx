@@ -28,6 +28,8 @@ const Hero = () => {
       
       {/* Background Decorative Elements */}
       <div className={styles.background}>
+        <div className={styles.heroBackground}></div>
+        <div className={styles.overlay}></div>
         <div className={styles.circle1}></div>
         <div className={styles.circle2}></div>
       </div>
