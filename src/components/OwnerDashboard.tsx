@@ -24,7 +24,7 @@ const OwnerDashboard = () => {
     setLoading(false);
   };
 
-  const handleStatusUpdate = async (id: string, status: 'confirmed' | 'cancelled') => {
+  const handleStatusUpdate = async (id: string, status: 'pending' | 'confirmed' | 'cancelled') => {
     const { error } = await updateBookingStatus(id, status);
     if (!error) {
       loadBookings();
@@ -88,6 +88,7 @@ const OwnerDashboard = () => {
       <div className={styles.bookingList}>
         <div className={styles.tableHeader}>
           <span>Guest</span>
+          <span>Studio</span>
           <span className={styles['hide-mobile']}>Contact</span>
           <span>Check In</span>
           <span>Check Out</span>
@@ -103,6 +104,7 @@ const OwnerDashboard = () => {
           bookings.map((booking) => (
             <div key={booking.id} className={styles.bookingRow}>
               <div style={{ fontWeight: 600 }}>{booking.guest_name}</div>
+              <div style={{ fontWeight: 700, color: 'var(--accent)' }}>#{booking.assigned_room_number || '?'}</div>
               <div className={styles['hide-mobile']} style={{ opacity: 0.6, fontSize: '0.85rem' }}>{booking.guest_email}</div>
               <div>{booking.check_in}</div>
               <div>{booking.check_out}</div>
