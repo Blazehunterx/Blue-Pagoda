@@ -138,6 +138,103 @@
   margin-bottom: 24px;
   color: var(--navy);
 }
+.roomGridSection {
+  margin-bottom: 48px;
+}
+
+.roomGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.roomCard {
+  aspect-ratio: 1;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.roomCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.roomCardActive {
+  border-color: var(--accent);
+  background: rgba(37, 99, 235, 0.05);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.roomCardOccupied::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+}
+
+.roomNum {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.roomLabel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.detailPanel {
+  margin-top: 32px;
+  padding: 32px;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.manualForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panelTitle {
+  font-size: 1.5rem;
+  color: var(--navy);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .detailPanel {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 900px) {
   .tableHeader, .bookingRow {

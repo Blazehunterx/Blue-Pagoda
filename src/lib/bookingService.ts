@@ -114,3 +114,43 @@ export const updateBookingStatus = async (bookingId: string, status: Booking['st
     .select();
   return { data, error };
 };
+/**
+ * NEW: Room-Specific Availability Logic (for Owner)
+ * Fetches dates occupied by a specific unit only.
+ */
+export const getBookedDatesForRoom = async (roomNumber: number): Promise<Date[]> => {
+  const { data, error } = await supabase
+    .from('bp_bookings')
+    .select('check_in, check_out')
+    .eq('assigned_room_number', roomNumber)
+    .neq('status', 'cancelled');
+
+  if (error) return [];
+
+  const bookedDates: Date[] = [];
+  data.forEach((booking: any) => {
+    const range = eachDayOfInterval({
+      start: parseISO(booking.check_in),
+      end: parseISO(booking.check_out)
+    });
+    bookedDates.push(...range);
+  });
+
+  return bookedDates;
+};
+
+/**
+ * NEW: Manual Owner Booking
+ * Bypasses auto-allocation to place a guest in a specific room.
+ */
+export const manualCreateBooking = async (booking: Booking) => {
+  const { data, error } = await supabase
+    .from('bp_bookings')
+    .insert([{ 
+      ...booking,
+      status: 'confirmed' // Owner bookings are confirmed instantly
+    }])
+    .select();
+
+  return { data, error };
+};
