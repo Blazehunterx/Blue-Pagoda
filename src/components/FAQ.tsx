@@ -22,8 +22,20 @@ const FAQS = [
     answer: "Yes! We provide dedicated high-speed fiber-optic Wi-Fi throughout the entire property, including the clubhouse and pool area, making it an ideal environment for digital nomads."
   },
   {
-    question: "Do you offer laundry services?",
-    answer: "Yes, we have an on-site laundry service available for a small fee, or we can recommend premium local laundry services within walking distance that offer pickup/delivery."
+    question: "Is there a swimming pool?",
+    answer: "Yes, we have a beautiful shared swimming pool accessible to all residents. It's the perfect place to cool off and relax after a day in Kuta."
+  },
+  {
+    question: "Is room cleaning included?",
+    answer: "Regular room cleaning is included in your stay to ensure a fresh and comfortable living environment at all times."
+  },
+  {
+    question: "Do you have laundry services?",
+    answer: "We do not offer a dedicated laundry service on-site. However, there are many excellent and affordable local laundry shops just a few steps away from our entrance."
+  },
+  {
+    question: "Are animals allowed?",
+    answer: "Yes! We are animal-friendly, and we already have friendly animals living at the homestay. Your well-behaved pets are more than welcome here."
   }
 ];
 
