@@ -41,6 +41,11 @@ const OwnerDashboard = () => {
   useEffect(() => {
     if (selectedRoom) {
       loadRoomData(selectedRoom);
+      // Reset manual form when switching rooms to prevent accidental duplicate entries
+      setManualName('');
+      setManualEmail('');
+      setManualStart(null);
+      setManualEnd(null);
     }
   }, [selectedRoom]);
 
@@ -165,7 +170,7 @@ const OwnerDashboard = () => {
       </section>
 
       {selectedRoom && (
-        <div className={styles.detailPanel}>
+        <div className={styles.detailPanel} key={selectedRoom}>
           <div>
             <h3 className={styles.panelTitle}><Calendar size={24} /> Studio #{selectedRoom} Schedule</h3>
             <DatePicker
