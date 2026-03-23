@@ -15,20 +15,15 @@ interface Room {
   electricity: string;
 }
 
-const STATIC_ROOMS: Room[] = Array.from({ length: 6 }, (_, i) => {
-  const id = i + 1;
-  const price = "8.5M IDR";
-  const electricity = "Including Electricity";
-  const imgId = (i % 4) + 1;
-
-  return {
-    id,
-    name: `Residence Room ${id}`,
-    idrPrice: price,
-    electricity,
-    image: `/rooms/room-${imgId}.jpg`
-  };
-});
+const STATIC_ROOMS: Room[] = [
+  {
+    id: 1,
+    name: "Exclusive Studio Room",
+    idrPrice: "8.5M IDR",
+    electricity: "Including Electricity",
+    image: "/rooms/room-1.jpg"
+  }
+];
 
 const RoomGallery = () => {
   const [rooms, setRooms] = useState<Room[]>(STATIC_ROOMS);

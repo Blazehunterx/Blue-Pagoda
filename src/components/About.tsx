@@ -54,38 +54,21 @@ const About = () => {
                 see why Blue Pagoda is your next sanctuary.
               </p>
               
-              <div className={styles.videoWrapper} onClick={() => setIsPlaying(true)}>
-                {!isPlaying ? (
-                  <>
-                    {/* Cinematic Ken Burns Motion Background */}
-                    <div className={styles.kenBurnsContainer}>
-                      {tourImgs.map((img, index) => (
-                        <div 
-                          key={index} 
-                          className={styles.kenBurnsSlide} 
-                          style={{ backgroundImage: `url(${img})` }}
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Play Overlay */}
-                    <div className={styles.videoOverlay}>
-                      <div className={styles.playButton}>▶</div>
-                      <span className={styles.videoTag}>Watch the Film</span>
-                    </div>
-                  </>
-                ) : (
-                  <video 
-                    className={styles.videoPlayer} 
-                    controls 
-                    autoPlay 
-                    src="/tour/tour.mp4"
-                    poster="/tour/poster.jpg"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                )}
+              <div className={styles.videoWrapper}>
+                {/* Cinematic Ken Burns Motion Slider */}
+                <div className={styles.kenBurnsContainer}>
+                  {tourImgs.map((img, index) => (
+                    <div 
+                      key={index} 
+                      className={styles.kenBurnsSlide} 
+                      style={{ backgroundImage: `url(${img})` }}
+                    />
+                  ))}
+                </div>
+                {/* Subtle Overlay Tag */}
+                <div className={styles.videoOverlay} style={{ background: 'transparent' }}>
+                  <span className={styles.videoTag} style={{ opacity: 0.6 }}>Atmosphere</span>
+                </div>
               </div>
             </div>
           </div>

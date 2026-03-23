@@ -28,7 +28,16 @@ const Hero = () => {
       
       {/* Background Decorative Elements */}
       <div className={styles.background}>
-        <div className={styles.heroBackground}></div>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className={styles.heroVideo}
+          poster="/tour/poster.jpg"
+        >
+          <source src="/tour/tour.mp4" type="video/mp4" />
+        </video>
         <div className={styles.overlay}></div>
         <div className={styles.circle1}></div>
         <div className={styles.circle2}></div>
