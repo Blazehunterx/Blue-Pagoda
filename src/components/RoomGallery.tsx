@@ -21,7 +21,7 @@ const STATIC_ROOMS: Room[] = [
     name: "Exclusive Studio Room",
     idrPrice: "8.5M IDR",
     electricity: "Including Electricity",
-    image: "/rooms/room-1.jpg"
+    image: "/rooms/studio-main.jpg"
   }
 ];
 

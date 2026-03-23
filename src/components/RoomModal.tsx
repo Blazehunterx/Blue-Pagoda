@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { X, Square, Home, Wind, Waves } from 'lucide-react';
+import BookingCalendar from './BookingCalendar';
 import styles from './RoomModal.module.css';
 
 interface Room {
@@ -62,9 +63,9 @@ const RoomModal = ({ room, onClose }: RoomModalProps) => {
 
             <p className={styles.description}>{details.description}</p>
 
-            <button className={styles.bookButton} onClick={() => window.open('https://wa.me/6287818384628', '_blank')}>
-              Book This Room
-            </button>
+            <div className={styles.bookingContainer}>
+              <BookingCalendar roomId={room.id} />
+            </div>
           </div>
         </div>
       </div>
